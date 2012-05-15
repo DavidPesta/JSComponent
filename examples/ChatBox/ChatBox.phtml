@@ -1,0 +1,44 @@
+<?php
+/*
+* Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JavascriptComponents
+* Licensed under the MIT License.
+* You should have received a copy of the MIT License along with this program.
+* If not, see http://www.opensource.org/licenses/mit-license.php
+*/
+?>
+
+<div class="ChatBox">
+	<div class="notInRoomState">
+		<div class="loginControls">
+			<div class="loginText">Enter a username to join this room:</div>
+			<span><input class="enterUsernameTextbox" type="text"></span>
+			<span><input class="chooseUsernameButton" type="button" value="Enter"></span>
+		</div>
+	</div>
+	<div class="insideRoomState">
+		<div class="roomInterface">
+			<div class="chatContentContainer"></div>
+			<div class="sideInterface">
+				<div class="participantContainer"></div>
+				<div class="logoutWrapper">
+					<input class="logoutButton" type="button" value="Logout">
+				</div>
+			</div>
+		</div>
+		<div class="chatInputControls">
+			<input class="chatInputTextbox" type="text">
+			<input class="sendChatButton" type="button" value="Send">
+		</div>
+	</div>
+</div>
+
+<div class="ChatItem">
+	<div class="usernameText"></div>
+	<div class="nonBreakingSpace">:&nbsp;</div>
+	<div class="chatText"></div>
+	<div style="clear: both;"></div>
+</div>
+
+<div class="ParticipantItem">
+	<div class="usernameText"></div>
+</div>

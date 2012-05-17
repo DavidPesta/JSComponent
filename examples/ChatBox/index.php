@@ -21,10 +21,10 @@
 		<link href="ChatBox.css" rel="stylesheet" type="text/css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="http://<?= $url ?>:443/socket.io/socket.io.js"></script>
-		<script src="http://<?= $url . $folder ?>../../Ajax/Ajax.js"></script>
 		<script src="http://<?= $url . $folder ?>../../ServerPush/ServerPush.js"></script>
+		<script src="http://<?= $url . $folder ?>../../Ajax/Ajax.js"></script>
 		<script src="http://<?= $url . $folder ?>../../Component.js"></script>
-		<script src="http://<?= $url . $folder ?>ChatBox.js"></script>
+		<script src="ChatBox.js"></script>
 	</head>
 	
 	<body>
@@ -44,17 +44,17 @@
 </html>
 
 <script>
-	window.leftChatBox = new ChatBox( "leftChatBox", "leftRoom" );
-	window.rightChatBox = new ChatBox( "rightChatBox", "rightRoom" );
+	window.leftChatBox = new ChatBox().init( "leftChatBox", "leftRoom" );
+	window.rightChatBox = new ChatBox().init( "rightChatBox", "rightRoom" );
 	
 	ServerPush = new ServerPush( 'http://<?= $url ?>', '/JavascriptComponents/ServerPush/', 443 );
 	
-	ServerPush.socket.on( 'disconnect', function() {
-		$( "#messages" ).append( "<div>disconnected</div>" );
-	});
-	
 	ServerPush.socket.on( 'loggedIn', function() {
 		$( "#messages" ).append( "<div>logged in</div>" );
+	});
+	
+	ServerPush.socket.on( 'disconnect', function() {
+		$( "#messages" ).append( "<div>disconnected</div>" );
 	});
 	
 	ServerPush.socket.on( 'userLeftRoom', function( userId, roomId ) {

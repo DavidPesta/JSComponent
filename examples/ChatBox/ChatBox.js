@@ -5,93 +5,88 @@
  * If not, see http://www.opensource.org/licenses/mit-license.php
  */
 
-function ChatBox( component, roomId ) {
+function ChatBox() {
 	var _this = this;
 	
-	_this.model = {
-		componentClass: ".ChatBox",
-		roomId: roomId,
-		roomState: ".notInRoomState",
-		participants: {}
-	};
+	_this.componentClass = ".ChatBox";
+	_this.roomId = null;
+	_this.roomState = ".notInRoomState";
+	_this.participants = {};
 	
-	
-	/****  Initial View Rendering Operations and Adjustments  ****/
-	
-	_this.attach( component );
-	
-	
-	/****  Event Bindings for Element Functionalities  ****/
-	
-	_this.select( ".sendChatButton" ).click( function() {
-		if( _this.select( ".chatInputTextbox" ).val() == "" ) {
-			_this.select( ".chatInputTextbox" ).focus();
-			return;
-		}
+	_this.init = function( component, roomId ) {
+		_this.attach( component );
 		
-		Ajax( "sendChat.php", {
-			"roomId": _this.model.roomId,
-			"message": _this.select( ".chatInputTextbox" ).val()
-		});
+		_this.roomId = roomId;
 		
-		_this.select( ".chatInputTextbox" ).val( "" );
-		_this.select( ".chatInputTextbox" ).focus();
-	});
-	
-	_this.select( ".chatInputTextbox" ).keypress( function( evt ) {
-		if( evt.keyCode == 13 ) _this.select( ".sendChatButton" ).trigger( "click" );
-	});
-	
-	_this.select( ".chooseUsernameButton" ).click( function() {
-		if( _this.select( ".enterUsernameTextbox" ).val() == "" ) {
-			_this.select( ".enterUsernameTextbox" ).focus();
-			return;
-		}
-		
-		Ajax( "joinRoom.php", {
-			"roomId": _this.model.roomId,
-			"username": _this.select( ".enterUsernameTextbox" ).val()
-		}, function( data ) {
+		_this.select( ".sendChatButton" ).click( function() {
+			if( _this.select( ".chatInputTextbox" ).val() == "" ) {
+				_this.select( ".chatInputTextbox" ).focus();
+				return;
+			}
+			
+			Ajax( "sendChat.php", {
+				"roomId": _this.roomId,
+				"message": _this.select( ".chatInputTextbox" ).val()
+			});
+			
+			_this.select( ".chatInputTextbox" ).val( "" );
 			_this.select( ".chatInputTextbox" ).focus();
 		});
-	});
-	
-	_this.select( ".enterUsernameTextbox" ).keypress( function( evt ) {
-		if( evt.keyCode == 13 ) _this.select( ".chooseUsernameButton" ).trigger( "click" );
-	});
-	
-	_this.select( ".logoutButton" ).click( function() {
-		Ajax( "logout.php", {
-			"roomId": _this.model.roomId
+		
+		_this.select( ".chatInputTextbox" ).keypress( function( evt ) {
+			if( evt.keyCode == 13 ) _this.select( ".sendChatButton" ).trigger( "click" );
 		});
-	});
-	
-	
-	/****  Controllers to Update the Data Model and Perform Corresponding View Changes  ****/
+		
+		_this.select( ".chooseUsernameButton" ).click( function() {
+			if( _this.select( ".enterUsernameTextbox" ).val() == "" ) {
+				_this.select( ".enterUsernameTextbox" ).focus();
+				return;
+			}
+			
+			Ajax( "joinRoom.php", {
+				"roomId": _this.roomId,
+				"username": _this.select( ".enterUsernameTextbox" ).val()
+			}, function( data ) {
+				_this.select( ".chatInputTextbox" ).focus();
+			});
+		});
+		
+		_this.select( ".enterUsernameTextbox" ).keypress( function( evt ) {
+			if( evt.keyCode == 13 ) _this.select( ".chooseUsernameButton" ).trigger( "click" );
+		});
+		
+		_this.select( ".logoutButton" ).click( function() {
+			Ajax( "logout.php", {
+				"roomId": _this.roomId
+			});
+		});
+		
+		return _this;
+	}
 	
 	_this.joinRoom = function( data ) {
-		_this.select( _this.model.roomState ).hide();
-		_this.model.roomState = data.roomState;
-		_this.select( _this.model.roomState ).show();
+		_this.select( _this.roomState ).hide();
+		_this.roomState = data.roomState;
+		_this.select( _this.roomState ).show();
 		
-		_this.model.participants = data.participants;
+		_this.participants = data.participants;
 		_this.refreshParticipants();
 	}
 	
 	_this.logout = function( data ) {
-		_this.select( _this.model.roomState ).hide();
-		_this.model.roomState = data.roomState;
-		_this.select( _this.model.roomState ).show();
+		_this.select( _this.roomState ).hide();
+		_this.roomState = data.roomState;
+		_this.select( _this.roomState ).show();
 	}
 	
 	_this.addParticipant = function( participant ) {
-		$.extend( _this.model.participants, participant );
+		$.extend( _this.participants, participant );
 		_this.refreshParticipants();
 	}
 	
 	_this.refreshParticipants = function() {
 		var container = $( "<div></div>" );
-		$.each( _this.model.participants, function( userId, username ) {
+		$.each( _this.participants, function( userId, username ) {
 			var participantItem = _this.cloneComponentClass( ".ParticipantItem" );
 			participantItem.find( ".usernameText" ).html( username );
 			participantItem.appendTo( container );
@@ -101,7 +96,7 @@ function ChatBox( component, roomId ) {
 	}
 	
 	_this.newChat = function( chat ) {
-		var username = _this.model.participants[ chat.userId ];
+		var username = _this.participants[ chat.userId ];
 		
 		var chatItem = _this.cloneComponentClass( ".ChatItem" );
 		chatItem.find( ".usernameText" ).html( username );
@@ -110,13 +105,8 @@ function ChatBox( component, roomId ) {
 	}
 	
 	_this.userLeft = function( userId ) {
-		delete _this.model.participants[ userId ];
+		delete _this.participants[ userId ];
 		_this.refreshParticipants();
 	}
-	
-	
-	/****  Supporting Methods  ****/
-	
-	// No supporting methods present
 }
 ChatBox.prototype = new Component();

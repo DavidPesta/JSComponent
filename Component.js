@@ -7,18 +7,18 @@
 
 function Component() {
 	this.attach = function( component ) {
-		if( component == null && this.model.component != null ) {
-			$( "#" + this.model.component ).empty();
+		if( component == null && this.component != null ) {
+			$( "#" + this.component ).empty();
 		}
 		else {
-			this.model.component = component;
-			$( "#components " + this.model.componentClass ).clone().contents().appendTo( "#" + component );
+			this.component = component;
+			$( "#components " + this.componentClass ).clone().contents().appendTo( "#" + component );
 		}
 	}
 	
 	this.select = function( element ) {
-		if( element == "component" ) return $( "#" + this.model.component );
-		else return $( "#" + this.model.component + " " + element );
+		if( element == "component" ) return $( "#" + this.component );
+		else return $( "#" + this.component + " " + element );
 	}
 	
 	this.cloneComponentClass = function( componentClass ) {

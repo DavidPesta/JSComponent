@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JavascriptComponents
+ * Licensed under the MIT License.
+ * You should have received a copy of the MIT License along with this program.
+ * If not, see http://www.opensource.org/licenses/mit-license.php
+ */
+
 div.notInRoomState { display: block; width: 480px; height: 440px; border: 1px solid #777; }
 div.loginControls { margin-top: 180px; text-align: center; }
 div.loginText { font-family: Arial; }

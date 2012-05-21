@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JavascriptComponents
+ * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
  * Licensed under the MIT License.
  * You should have received a copy of the MIT License along with this program.
  * If not, see http://www.opensource.org/licenses/mit-license.php
@@ -8,7 +8,7 @@
 function SimpleExample() {
 	var _this = this;
 	
-	_this.componentClass = ".SimpleExample";
+	_this.JSComponentClass = ".SimpleExample";
 	_this.state = null;
 	
 	_this.init = function( component ) {
@@ -31,4 +31,4 @@ function SimpleExample() {
 		$( _this.state ).show();
 	}
 }
-SimpleExample.prototype = new Component();
+SimpleExample.prototype = new JSComponent();

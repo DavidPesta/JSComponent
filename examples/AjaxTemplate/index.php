@@ -1,10 +1,11 @@
 <?php
 /*
-* Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
-* Licensed under the MIT License.
-* You should have received a copy of the MIT License along with this program.
-* If not, see http://www.opensource.org/licenses/mit-license.php
-*/
+ * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+ * This template file is licensed under a MODIFIED MIT License:
+ * The intent of this template file is for you to remove this license and replace it with your own.
+ * This applies only to template files in this project. All MIT liability disclaimers remain in effect.
+ * David Pesta relinquishes copyright over just this file the instant you modify it for your own project.
+ */
 ?>
 <!DOCTYPE html>
 

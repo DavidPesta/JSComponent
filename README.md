@@ -4,7 +4,7 @@ JSComponent
 A simple light weight framework and supporting libraries for Javascript component development.
 
 <b>Initial Release:</b> May 15, 2012<br>
-<b>Last Updated:</b> May 21, 2012
+<b>Last Updated:</b> May 23, 2012
 
 
 ## Documentation
@@ -59,7 +59,9 @@ $vars = array(
 	"var2" => $val2
 );
 
-ServerPush::callForEveryone( "someComponent", "someMethod", $vars );
+// You might do either one of the following, or both, in a given controller:
+ServerPush::callForEveryone( "someComponent", "someMethod", $vars ); // ServerPush calls could appear multiple times in a script
+Ajax::call( "someComponent", "someMethod", $vars ); // This would be called only once as the response at the end of an ajax call
 ```
 Doing the above from inside PHP is equivalent to calling something like this inside of javascript on the client:
 ``` javascript
@@ -82,7 +84,9 @@ $methods = array(
 	)
 );
 
-ServerPush::callForRoom( $roomId, "someComponent", $methods );
+// You might do either one of the following, or both, in a given controller:
+ServerPush::callForRoom( $roomId, "someComponent", $methods ); // ServerPush calls could appear multiple times in a script
+Ajax::call( "someComponent", $methods ); // This would be called only once as the response at the end of an ajax call
 ```
 Doing the above from inside PHP is equivalent to calling something like this inside of javascript on the client:
 ``` javascript
@@ -121,7 +125,9 @@ $components = array(
 	)
 );
 
-Ajax::call( $components );
+// You might do either one of the following, or both, in a given controller:
+ServerPush::callForUser( $userId, $components ); // ServerPush calls could appear multiple times in a script
+Ajax::call( $components ); // This would be called only once as the response at the end of an ajax call
 ```
 Doing the above from inside PHP is equivalent to calling something like this inside of javascript on the client:
 ``` javascript

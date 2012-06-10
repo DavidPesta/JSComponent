@@ -15,7 +15,7 @@ include "../../Ajax/Ajax.php";
 //$var2 = $_POST[ 'var2' ];
 
 /* Example Ajax Response:
-	Ajax::call( "AjaxTemplateInstance", "controller", array(
+	Ajax::call( "ajaxTemplateInstance", "controller", array(
 		"var1" => $val1,
 		"var2" => $val2
 	));

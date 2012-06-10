@@ -21,10 +21,10 @@
 			<? include "SimpleExample.phtml" ?>
 		</div>
 		
-		<div id="SimpleExampleInstance"></div>
+		<div id="simpleExampleInstance"></div>
 	</body>
 </html>
 
 <script>
-	window.SimpleExampleInstance = new SimpleExample().init( "SimpleExampleInstance" );
+	window.simpleExampleInstance = new SimpleExample().init( "simpleExampleInstance" );
 </script>

@@ -23,10 +23,10 @@
 			<? include "AjaxTemplate.phtml" ?>
 		</div>
 		
-		<div id="AjaxTemplateInstance"></div>
+		<div id="ajaxTemplateInstance"></div>
 	</body>
 </html>
 
 <script>
-	window.AjaxTemplateInstance = new AjaxTemplate().init( "AjaxTemplateInstance" );
+	window.ajaxTemplateInstance = new AjaxTemplate().init( "ajaxTemplateInstance" );
 </script>

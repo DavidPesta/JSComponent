@@ -4,7 +4,7 @@ JSComponent
 A simple light weight framework and supporting libraries for Javascript component development.
 
 <b>Initial Release:</b> May 15, 2012<br>
-<b>Last Updated:</b> May 23, 2012
+<b>Last Updated:</b> June 10, 2012
 
 
 ## Documentation

@@ -16,7 +16,7 @@ include "../../ServerPush/ServerPush.php";
 //$var2 = $_POST[ 'var2' ];
 
 /* Example Ajax Response:
-	Ajax::call( "FullTemplateInstance", "controller", array(
+	Ajax::call( "fullTemplateInstance", "controller", array(
 		"var1" => $val1,
 		"var2" => $val2
 	));

@@ -11,7 +11,7 @@
 include "../../ServerPush/ServerPush.php";
 
 /* Example ServerPush Call:
-	ServerPush::callForUser( $userId, "ServerPushTemplateInstance", "controller", array(
+	ServerPush::callForUser( $userId, "serverPushTemplateInstance", "controller", array(
 		"var1" => $val1,
 		"var2" => $val2
 	));

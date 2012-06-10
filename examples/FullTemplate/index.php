@@ -25,12 +25,12 @@
 			<? include "FullTemplate.phtml" ?>
 		</div>
 		
-		<div id="FullTemplateInstance"></div>
+		<div id="fullTemplateInstance"></div>
 	</body>
 </html>
 
 <script>
-	window.FullTemplateInstance = new FullTemplate().init( "FullTemplateInstance" );
+	window.fullTemplateInstance = new FullTemplate().init( "fullTemplateInstance" );
 	
 	ServerPush = new ServerPush( 'http://<?= $_SERVER[ 'HTTP_HOST' ] ?>', '/JSComponent/ServerPush/', 443 );
 	

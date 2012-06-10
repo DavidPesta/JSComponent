@@ -24,12 +24,12 @@
 			<? include "ServerPushTemplate.phtml" ?>
 		</div>
 		
-		<div id="ServerPushTemplateInstance"></div>
+		<div id="serverPushTemplateInstance"></div>
 	</body>
 </html>
 
 <script>
-	window.ServerPushTemplateInstance = new ServerPushTemplate().init( "ServerPushTemplateInstance" );
+	window.serverPushTemplateInstance = new ServerPushTemplate().init( "serverPushTemplateInstance" );
 	
 	ServerPush = new ServerPush( 'http://<?= $_SERVER[ 'HTTP_HOST' ] ?>', '/JSComponent/ServerPush/', 443 );
 	

@@ -22,10 +22,10 @@
 			<? include "BasicTemplate.phtml" ?>
 		</div>
 		
-		<div id="BasicTemplateInstance"></div>
+		<div id="basicTemplateInstance"></div>
 	</body>
 </html>
 
 <script>
-	window.BasicTemplateInstance = new BasicTemplate().init( "BasicTemplateInstance" );
+	window.basicTemplateInstance = new BasicTemplate().init( "basicTemplateInstance" );
 </script>

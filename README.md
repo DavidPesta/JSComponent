@@ -276,7 +276,7 @@ User room notification paradigm for ServerPush:
 
 ## License
 
-(The MIT License)
+The MIT License
 
 Copyright (c) 2012 David Pesta
 

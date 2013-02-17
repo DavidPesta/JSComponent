@@ -249,7 +249,7 @@ In every other way, the pages operate and behave just like components that simpl
 
 ## Helpful Tips and Best Practices
 
-- Make good use of the templates found inside of the examples folder. When you want to create a new JSComponent, starting with a template is the quickest way to go and behaves as a guide to prevent mistakes and headaches.
+- Make good use of the templates found inside of the templates folder. When you want to create a new JSComponent, starting with a template is the quickest way to go and behaves as a guide to prevent mistakes and headaches.
 
 - Very important tip: Make sure that whenever something about the html view needs to change, the data that supports this view also needs to be updated in the object's data properties; and vice versa! It is the job of the js file's controller methods to keep the data model and the view in sync.
 

@@ -1,4 +1,4 @@
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([\/\-?#A-Za-z0-9]+)$ index.php
+RewriteRule ^([\/\-?#A-Za-z0-9]*)$ router.php

@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+* Copyright (c) 2012-2013 David Pesta, https://github.com/DavidPesta/JSComponent
 * This file is licensed under the MIT License.
 * You should have received a copy of the MIT License along with this program.
 * If not, see http://www.opensource.org/licenses/mit-license.php
@@ -22,5 +22,5 @@ if( $roomId == "rightRoom" ) $component = "rightChatBox";
 ServerPush::removeRoomUser( $roomId, $userId );
 
 Ajax::call( $component, "logout", array(
-	"roomState" => ".notInRoomState"
+	"roomState" => "notInRoomState"
 ));

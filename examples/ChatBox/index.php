@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	* Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+	* Copyright (c) 2012-2013 David Pesta, https://github.com/DavidPesta/JSComponent
 	* This file is licensed under the MIT License.
 	* You should have received a copy of the MIT License along with this program.
 	* If not, see http://www.opensource.org/licenses/mit-license.php
@@ -19,11 +19,11 @@
 <html>
 	<head>
 		<link href="ChatBox.css" rel="stylesheet" type="text/css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="http://<?= $url ?>:443/socket.io/socket.io.js"></script>
-		<script src="http://<?= $url . $folder ?>../../ServerPush/ServerPush.js"></script>
-		<script src="http://<?= $url . $folder ?>../../Ajax/Ajax.js"></script>
-		<script src="http://<?= $url . $folder ?>../../JSComponent.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="//<?= $url ?>:443/socket.io/socket.io.js"></script>
+		<script src="//<?= $url . $folder ?>../../ServerPush/ServerPush.js"></script>
+		<script src="//<?= $url . $folder ?>../../Ajax/Ajax.js"></script>
+		<script src="//<?= $url . $folder ?>../../JSComponent.js"></script>
 		<script src="ChatBox.js"></script>
 	</head>
 	
@@ -34,8 +34,8 @@
 		
 		<div style="margin-bottom: 20px;">userId: <?= $_SESSION[ 'userId' ] ?></div>
 		
-		<div id="leftChatBox" style="float: left; background-color: #FDD;"></div>
-		<div id="rightChatBox" style="float: left; background-color: #DDF; margin-left: 10px;"></div>
+		<div class="leftChatBox" style="float: left; background-color: #FDD;"></div>
+		<div class="rightChatBox" style="float: left; background-color: #DDF; margin-left: 10px;"></div>
 		
 		<div style="clear: both;"></div>
 		

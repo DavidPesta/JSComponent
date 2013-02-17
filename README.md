@@ -4,14 +4,22 @@ JSComponent
 A simple light weight framework and supporting libraries for Javascript component development.
 
 <b>Initial Release:</b> May 15, 2012<br>
-<b>Last Updated:</b> June 10, 2012
+<b>Last Updated:</b> February 17, 2013
 
 
 ## Documentation
 
 ### Introduction
 
-The examples folder contains ChatBox, which is a fully functional chat room that utilizes this framework and its supporting libraries. But before you study ChatBox, you may want to look at SimpleExample, which is an even easier introduction to how the framework works. Code templates for rapid component development can also be found in the examples folder. All of these examples are a helpful reference and should be looked at when studying this documentation to learn how to use JSComponents.
+The examples folder contains the following projects, which should be reviewed in the following order for the best conceptual progression of learning this framework:
+
+1. SimpleExample
+2. ChatBox
+3. SimpleNesting
+4. AdvancedNesting
+5. SitePages
+
+ChatBox is a fully functional chat room that utilizes this framework and its supporting libraries. But before you study ChatBox, you may want to look at SimpleExample, which is an even easier introduction to how the framework works. After you get more familiar with those two example projects, you'll definitely want to dive into the versatility of nesting components by studying SimpleNesting, AdvancedNesting, and finally SitePages example projects. Then you will have a full appreciation for what the JSComponent library can do to organize your front-end development efforts. Code templates for rapid component development can be found in the templates folder. All of these examples and templates are a helpful reference and should be looked at when studying this documentation to learn how to use JSComponents.
 
 In short, a JSComponent is made up of 3 files and has 4 document hookups in order to get it to work:
 - Files:
@@ -21,8 +29,8 @@ In short, a JSComponent is made up of 3 files and has 4 document hookups in orde
 - Hookups:
   - The js and css file dependencies need to be defined in the document head
   - The contents of the phtml file needs to be added to the inside of the hidden "JSComponents" div using a PHP "include" statement
-  - A div needs to be created with the component's name as its id in the location that you want the component to appear
-  - A line of javascript needs to execute the "new" statement to create the component's javascript object and immediately execute the init method through javascript call chaining, passing to init the component's name. All of this gets assigned to a javascript variable (preferably also of the same name) attached to the document's window object. This may sound confusing, but it can be seen near the bottom of the SimpleExample index.php file.
+  - A div needs to be created with the component's name as the div's class in the DOM location where you want the component to appear
+  - A line of javascript needs to execute the "new" statement to create the component's javascript object and immediately execute the init method through javascript call chaining, passing to init the component's name. All of this gets assigned to a javascript variable (conventionally also of the same name) attached to the document's window object (or in the case of nested components, assigned to the parent's property). This may sound confusing, but it can be seen near the bottom of the SimpleExample index.php file.
 
 The Ajax and ServerPush systems were designed to compliment this framework by allowing PHP on the server to effectively make calls directly to a JSComponent on the client. This is well documented later.
 
@@ -30,7 +38,7 @@ The Ajax and ServerPush systems were designed to compliment this framework by al
 
 What is a phtml file? A phtml file functions and behaves just like any other ordinary php file. However, the phtml file has a unique purpose that the developer is trying to make everyone aware of. When a developer labels the extension of their file with phtml instead of php, they are communicating that the file needs to be thought of (conceptually) as an HTML file. The developer can't just use a plain old HTML file because the file needs to have functional PHP inside of it. In short, a phtml file is an HTML file with the power to run PHP statements inside of it.
 
-The phtml file's outermost div needs to have a unique CSS class name, and this name needs to be assigned to the "JSComponentClass" property near the beginning of the component's javascript file. Be sure to include the period in front of it, which is its CSS class selector. The outermost div should contain detailed html structure for various states that might be hidden or shown at different times based on the state functionality of the component.
+The phtml file of a JSComponent needs to have an outermost div with a unique CSS class name, and this name needs to be assigned to the "JSComponentClass" property near the beginning of the component's javascript file. That outermost div should be a container that holds detailed html structures for various states that might be hidden or shown at different times based on the state functionality of the component.
 
 Each html element may have a class that can be referred to (not as a hard rule) and may also be aided by classes that group various component elements that can be selected collectively. All of this can be supported by a CSS file (which should be given the same filename) that defines styles and images for the element's classes. A class should always be used instead of an id for every element in the phtml file just in case you want multiple instances of the component on the same page. It is invalid for two elements on the same page to have the same id.
 
@@ -38,19 +46,19 @@ Each html element may have a class that can be referred to (not as a hard rule) 
 
 A component's js file is where all of the interesting dynamic stuff happens.
 
-All components should extend the JSComponent.js class--this can be seen at the very end of the js file. At the very top of the file, after the js class declaration, the first thing that appears inside of the class is "var _this = this;". This allows a reference to "this" via "_this" to be passed to the inside of jQuery command closures (such as the "click" function), as well as everywhere else throughout the class. Next, we want to add the "JSComponentClass" property and assign it's value to what we are calling the class name of the phtml's outer div. Be sure to put a period in front of this value so that it can be utilized as a CSS class selector and the system can find the component's html structure inside of the phtml file.
+All components should extend the JSComponent.js class--this can be seen at the very end of the js file. At the very top of the file, after the js class declaration, the first thing that appears inside of the class is "var _this = this;". This allows a reference to "this" via "_this" to be passed to the inside of jQuery command closures (such as the "click" function), as well as everywhere else throughout the class. Next, we want to add the "JSComponentClass" property and assign it's value to what we are calling the class name of the phtml's outer div. Along with the "JSComponentClass" property, you can declare or assign all kinds of class properties that you want to use for this component.
 
-Next comes the init function. This is analogous to the constructor found in most object oriented programming languages. It can accept any number of parameters, but must accept at least one: component. The init function must accept the name of the component as an argument so that it can immediately "attach" the component to the div where you intend for it to appear in the html document. After this, we add whatever javascript we want, to make the component appear the way it is supposed to look the first time it is initialized. Then, define user interactivity triggers and attach events onto various view elements, along with any desired callback functionalities. At the very end of the init function, we need this line: "return _this;". That line will allow chaining to work properly so that the entire object is assigned to the object that gets created and attached to the document window.
+Next comes the init function. This is analogous to the constructor found in most object oriented programming languages. It can accept any number of parameters, but must accept at least one: DOMClassChain. The init function must accept the name of the component (and in the case of nesting, a concatenated string or chain of DOM class selectors) as an argument so that it can immediately "attach" the component to the div where you intend for it to appear in the html document. After this, we add whatever javascript we want, to make the component appear the way it is supposed to look the first time it is initialized. Then, define user interactivity triggers and attach events onto various view elements, along with any desired callback functionalities. At the very end of the init function, we need this line: "return _this;". That line will allow chaining to work properly so that the entire object is assigned to the object that gets created and attached to the document window or other parent component object properties.
 
 Next comes the controllers: methods that get called whenever a change to the state of the component is supposed to happen, keeping object's data properties and html view appearance in sync. If you are wanting the html of the object to change in some way or update some data in the object's parameters, it is done inside of the object's methods (understood to be controllers). The most important thing is that all data property changes must stay in sync with any view changes, and vice versa. It is the job of the controller to keep all object data and the view in sync.
 
 Any kind of supporting methods (that aren't controllers) can also be added, things that help with various calculations or formatting.
 
-Again, don't forget to extend the JSComponent.js with this new class by adding "new JSComponent()" to the new class's prototype. This is done immediately after the class's definition at the bottom of the file.
+Again, don't forget to extend the JSComponent.js with this new class by assigning "new JSComponent()" to the new class's prototype. This is done immediately after the class's definition at the bottom of the file.
 
 ### Sending Data From PHP to a JSComponent Using Ajax or ServerPush
 
-What Ajax and ServerPush both have in common is how they allow a structured PHP array to communicate with a JSComponent on the client in very powerful ways. For Ajax::call and ServerPush::callFor[User][Users][Room][Rooms][Everyone], they both give you a lot of flexibility with how to send data back to the client's components, effectively executing calls directly on the component's controllers.
+What Ajax and ServerPush both have in common is how they allow a structured PHP array to communicate with a JSComponent on the client in very powerful ways. For Ajax::call and ServerPush::callFor&lt;User/Users/Room/Rooms/Everyone&gt;, they both give you a lot of flexibility with how to send data back to the client's components, effectively executing calls directly on the component's controllers.
 
 You can pass a single component to the $component parameter as a string, a single method to the $method parameter as a string, then pass an array of variables and values to the $vars parameter for that component's method:
 ``` php
@@ -214,6 +222,30 @@ ServerPush::callForRoom( $roomId, $component, "newChat", array(
 ));
 ```
 
+### Nested Components
+
+In the examples folder, SimpleNesting and AdvancedNesting illustrate how to nest components inside of each other, even dynamically. This section points out the additional details involved to enable nesting.
+
+First of all, when invoking the "init" method after instantiating a class, the "this" object is passed as a second parameter to the "init" method so that it can be attached to the parent property of that new object.
+
+This paragraph is long, but important. To attach a child component, the parent shall invoke the "attachChild" method and pass to it the class/function of the child component along with the additional parameters two, three, or four. The first of these additional parameters (parameter two) is required and is a string that represents the class in the DOM where this new component should be added. This is not a fully qualified DOM chain, but rather a single class name of some element that can be found in the parent DOM component. If parameters three and four, which are optional, are missing, then the second parameter is used as a string to assign the resulting child object to a named property of the parent object. However, if the third parameter is present with the fourth parameter missing, then that third parameter is used as a string to assign the resulting child object to a named property of the parent object. Now if the fourth parameter is also present, then the third parameter is not a string, but rather a reference to an object, and the fourth parameter is a string that represents the named property of that object to which the resulting child object will be assigned. This set of possibilities gives unlimited flexibilty for where child objects might be assigned to parent member structures. Any object at any level in any data structure of the parent can be passed as parameter three, and then parameter four can be a property of that object. So with all of this, the child can be assigned anywhere within the parent that the developer wishes.
+
+After setting this up, parent components can be accessed using _this.parent, grandparent components can be accessed using _this.parent.parent, and child objects can be accessed using whatever property they were assigned to.
+
+What if a child component wants to make an Ajax call and also be the target of the Ajax response? The way to do this can be found in SimpleNesting's Component3.js file. A signature is created using _this.componentSignature() and used as the identifier to attach _this to the window. Then, this same signature is passed to the Ajax call so that the Ajax call can direct its response to that signature, which is this object. Also, keep in mind, you don't have to use the component's signature to attach _this to the window. You can come up with any system or ad-hoc name as you wish, so even ServerPush can identify the component by some standard set of names attached to window.
+
+### Single Document Pages
+
+The JSComponent architecture allows for the development of applications that can present multiple pages from a single document delivery. A good example of this implementation is SitePages inside of the examples folder.
+
+First thing, .htaccess redirects all requests that are not already existing files to the index.php script that resides along with the .htaccess file. Of course, the webserver host can be configured with the rewrite rule instead of .htaccess.
+
+In index.php, the pages and layout are loaded and treated just like any other ordinary JSComponent. Some fancy looping was employed here, but really, it's no different.
+
+The Layout1.js component has a method called changePage that implements the modern browser pushState system. This is used in conjunction with the implementation of the window.onpopstate near the bottom of the index.php file. The changePage method keeps track of what page is shown and hidden based on what push state it is in. They key is, whenever the browser back button is used and window.onpopstate is run, fromPopState is passed as true and therefore does NOT get stored in the window.history.pushState inside of the changePage method. This allows the forward and the back buttons to be pressed many times and state history does not get changed from it. (Incidentally, the call to window.history.pushState passes "page" as the first and also the second parameter. At the time of this writing, the second parameter is the "title" and is ignored by the browser, but the first parameter is the state object and can contain any serializable data. It works well for storing the page name so that it gets invoked in the popstate event and is available as event.state.)
+
+In every other way, the pages operate and behave just like components that simply get shown and hidden depending on what page that the Layout determines should be showing. The only other thing to pay attention to is that the pages make calls to the layout's changePage function in order to change to another page.
+
 
 ## Helpful Tips and Best Practices
 
@@ -229,7 +261,9 @@ ServerPush::callForRoom( $roomId, $component, "newChat", array(
   - Item: a separate set of html elements that gets cloned, modified, and inserted into a Container
   - Textbox: an input box for the user to add text
   - Button: an element for the user to click to perform an action of some sort
-  - Text: an ordinary label intended to be read by the user
+  - Label: an ordinary label intended to be read by the user
+  - Radio: a radio button
+  - Checkbox: a checkbox
 
 - Think of phtml component structures as having states
   - Various flags in the data model get turned on and off to switch the component into different states
@@ -244,9 +278,9 @@ ServerPush::callForRoom( $roomId, $component, "newChat", array(
 - Here's how to explicitly select multiple classes in jQuery: $( '.checkbox1, .checkbox2' )
   - We can also give them a common class and select them like this: $( '.commonClass' )
 
-- All component objects should be explicitly assigned to the document's window so that it is clear where it is attached: window.component
+- All root component objects should be explicitly assigned to the document's window using the word "window" so that it is clear where it is attached: window.component
 
-- Keep in mind that you can have multiple elements on the page with the same class, which results from multiple instances of the same JSComponent in separate places on the page. You can still distinguish between them when selecting for them by selecting for its containing element, separated by space, followed by the selector for the class name of the element. For example: ".containerClass .commonClass" selects for the .commonClass element inside of .containerClass even if more than one element exists on the page with ".commonClass" as its class.
+- Keep in mind that you can have multiple elements on the page with the same class, which results from multiple instances of the same JSComponent in separate places on the page. You can still distinguish between them when selecting for them by selecting for its containing element, separated by space, followed by the selector for the class name of the element. For example: ".containerClass .commonClass" selects for the .commonClass element inside of .containerClass even if more than one element exists on the page with ".commonClass" as its class. There is a system built-in that will often handle this for you. The DOMClassChain gets built by every nested call to attachChild when adding children components.
 
 How to think about Ajax vs. ServerPush:
   - A normal Ajax call is made to a PHP script, and the script sends back a single response to the Ajax call to end the execution of the script
@@ -269,16 +303,19 @@ User room notification paradigm for ServerPush:
 
 - If you cannot get an object's controllers to work (from anywhere, PHP or elsewhere), you might have neglected to put "return _this;" at the end of the init function.
 
-- A considerable amount of time was spent debugging a problem that turned out to be a missing period in front of the JSComponentClass that was defined inside of the model. Always be attentive to class selectors being defined properly with periods.
-
 - Make sure you utilize the cloneJSComponentClass method found in the JSComponent.js base class. If you attempt to do this manually, you may accidentally find yourself doing something like this: "$( ".ClassName" ).clone();", which may clone this from somewhere else on the page (and not from inside "#JSComponents") if it had already been attached somewhere. This is particularly nasty because it can lead to intermittent errors, where the initial state is messed up in the event that it already exists on the page, but perfectly normal when it does not already exist on the page.
+
+
+## To Do List
+
+- A PHP program script that takes input parameters in a form and then automatically generates all the files for a new empty shell component based on those parameters, even placing them in the location specified
 
 
 ## License
 
 The MIT License
 
-Copyright (c) 2012 David Pesta
+Copyright (c) 2012-2013 David Pesta
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+ * Copyright (c) 2012-2013 David Pesta, https://github.com/DavidPesta/JSComponent
  * This template file is licensed under a MODIFIED MIT License:
  * The intent of this template file is for you to remove this license and replace it with your own.
  * This applies only to template files in this project. All MIT liability disclaimers remain in effect.
@@ -12,8 +12,8 @@
 <html>
 	<head>
 		<link href="BasicTemplate.css" rel="stylesheet" type="text/css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="http://<?= $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ?>../../JSComponent.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="//<?= $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ] ?>../../JSComponent.js"></script>
 		<script src="BasicTemplate.js"></script>
 	</head>
 	
@@ -22,7 +22,7 @@
 			<? include "BasicTemplate.phtml" ?>
 		</div>
 		
-		<div id="basicTemplateInstance"></div>
+		<div class="basicTemplateInstance"></div>
 	</body>
 </html>
 

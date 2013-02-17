@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+ * Copyright (c) 2012-2013 David Pesta, https://github.com/DavidPesta/JSComponent
  * This template file is licensed under a MODIFIED MIT License:
  * The intent of this template file is for you to remove this license and replace it with your own.
  * This applies only to template files in this project. All MIT liability disclaimers remain in effect.
@@ -9,11 +9,12 @@
 function AjaxTemplate() {
 	var _this = this;
 	
-	_this.JSComponentClass = ".AjaxTemplate";
+	_this.JSComponentClass = "AjaxTemplate";
+	
 	/****  Define All Object Properties Here  ****/
 	
-	_this.init = function( component ) {
-		_this.attach( component );
+	_this.init = function( DOMClassChain ) {
+		_this.attachToDOM( DOMClassChain );
 		
 		/****  Initial View Rendering Operations and Adjustments  ****/
 		/****   and Event Bindings for Element Functionalities    ****/

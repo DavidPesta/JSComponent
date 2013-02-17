@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2012 David Pesta, https://github.com/DavidPesta/JSComponent
+ * Copyright (c) 2012-2013 David Pesta, https://github.com/DavidPesta/JSComponent
  * This template file is licensed under a MODIFIED MIT License:
  * The intent of this template file is for you to remove this license and replace it with your own.
  * This applies only to template files in this project. All MIT liability disclaimers remain in effect.
